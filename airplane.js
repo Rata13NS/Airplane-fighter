@@ -1,5 +1,8 @@
 let canvas = document.getElementById('avionCanvas');
 let ctx = canvas.getContext('2d');
+let min = 1500;
+let max = 500;
+let crashCounter = 0;
 
 // Dimensiunea panzei
 canvas.width = window.innerWidth;
@@ -22,11 +25,12 @@ airplane.draw()
 // Mut avionul
 document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowLeft' && airplane.x > 200) {
-        airplane.x -= 200;
+        ctx.clearRect(airplane.x, airplane.y, airplane.width, airplane.height);
+        airplane.x -= 80;
     } else if (event.key === 'ArrowRight' && airplane.x < 1700) {
-        airplane.x += 200;
+        ctx.clearRect(airplane.x, airplane.y, airplane.width, airplane.height);
+        airplane.x += 80;
     }
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     airplane.draw();
 });
 
@@ -34,7 +38,7 @@ setInterval(showObstacles, 2000);
 // Creez obstacole si le fac sa se miste
 function showObstacles() {
     let obstacle = {
-        w: Math.floor(Math.random() * (canvas.width - 1000)),
+        w: Math.floor(Math.random() * (max - min + 1) + min),
         z: 0,
         width: 100,
         height: 100,
@@ -51,9 +55,19 @@ function showObstacles() {
 
     function animate() {
         requestAnimationFrame(animate);
+        ctx.clearRect(obstacle.w, obstacle.z, obstacle.width, obstacle.height);
         obstacle.update();
         obstacle.draw();
+        if (airplane.x < obstacle.w + obstacle.width &&
+            airplane.x + airplane.width > obstacle.w &&
+            airplane.y < obstacle.z + obstacle.height &&
+            airplane.y + airplane.height > obstacle.z) {
+            ++crashCounter;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (crashCounter === 1) {
+                alert('Game OVER! You hit an obstacle!');
+            }
+        }
     }
-    
     animate();
 }
