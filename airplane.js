@@ -28,19 +28,17 @@ airplane.draw()
 document.addEventListener('keydown', function(event) {
     if (gameOver === false) {
         if (event.key === 'ArrowLeft' && airplane.x > 200) {
-            ctx.clearRect(airplane.x, airplane.y, airplane.width, airplane.height);
+            ctx.clearRect(airplane.x, airplane.y, airplane.width, airplane.height + 1);
             airplane.x -= 80;
         } else if (event.key === 'ArrowRight' && airplane.x < 1700) {
-            ctx.clearRect(airplane.x, airplane.y, airplane.width, airplane.height);
+            ctx.clearRect(airplane.x, airplane.y, airplane.width, airplane.height + 1);
             airplane.x += 80;
         }
         airplane.draw();
     }
 });
 
-setInterval(showObstacles, 2000);
-
-// Creez obstacole si le fac sa se miste
+// Creez obstacole, le fac sa se miste si afisez punctajul
 function showObstacles() {
     if (gameOver === false) {
         let obstacle = {
@@ -80,6 +78,7 @@ function showObstacles() {
     }
 }
 
+//calculez punctajul
 function incrementSeconds() {
     seconds += 1;
 }
