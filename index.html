@@ -11,8 +11,10 @@
   <body>
     <canvas id="avionCanvas" width="2000" height="1000"></canvas>
     <canvas id="obstaclesCanvas" width="2000" height="1000"></canvas>
-    <script 
-        src="airplane.js">
-   </script> 
+    <script src="airplane.js"> </script> 
+    <script>
+      setInterval(incrementSeconds, 1000);
+      setInterval(showObstacles, 2000);
+    </script> 
   </body>
 </html>
