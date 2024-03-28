@@ -1,16 +1,14 @@
-let canvas = document.getElementById('avionCanvas');
+let canvas = document.getElementById('airplaneCanvas');
 let ctx = canvas.getContext('2d');
 let min = 1500;
 let max = 500;
 let crashCounter = 0;
 let gameOver = false;
 let seconds = 0;
-
-// Dimensiunea panzei
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Creez avionul
+// Create the airplane
 let airplane = {
     x: canvas.width / 2,
     y: canvas.height / 1.3,
@@ -24,7 +22,7 @@ let airplane = {
 };
 airplane.draw()
 
-// Mut avionul
+// Move the airplane
 document.addEventListener('keydown', function(event) {
     if (gameOver === false) {
         if (event.key === 'ArrowLeft' && airplane.x > 200) {
@@ -38,7 +36,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Creez obstacole, le fac sa se miste si afisez punctajul
+// Create the obstacles, make them move and display the points
 function showObstacles() {
     if (gameOver === false) {
         let obstacle = {
@@ -47,7 +45,7 @@ function showObstacles() {
             width: 100,
             height: 100,
             color: 'white',
-            speed: 5,
+            speed: 3,
             draw: function() {
                 ctx.fillStyle = this.color;
                 ctx.fillRect(this.w, this.z, this.width, this.height);
@@ -78,7 +76,7 @@ function showObstacles() {
     }
 }
 
-//calculez punctajul
+// Calculate the points
 function incrementSeconds() {
     seconds += 1;
 }
