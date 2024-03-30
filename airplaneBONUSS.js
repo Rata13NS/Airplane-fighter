@@ -50,7 +50,7 @@ function showObstacles() {
             width: 100,
             height: 100,
             color: 'white',
-            speed: 6,
+            speed: 7,
             draw: function() {
                 ctx.fillStyle = this.color;
                 ctx.fillRect(this.w, this.z, this.width, this.height);
@@ -70,9 +70,10 @@ function showObstacles() {
                         ammunitions[i].n + ammunitions[i].height > obstacles[j].z) {
                             ctx.clearRect(ammunitions[i].m, ammunitions[i].n, ammunitions[i].width, ammunitions[i].height + 2);
                             ctx.clearRect(obstacles[j].w, obstacles[j].z, obstacles[j].width, obstacles[j].height);
-                            destroyedObstacle = true;
                             ++destroyedObstacles;
-                            console.log(destroyedObstacle);
+                            destroyedObstacle = true;
+                            ammunitions.splice(i, 1);
+                            obstacles.splice(j, 1);
                     }  
                 }
             }
@@ -107,7 +108,7 @@ document.addEventListener('keydown', function(event) {
                 width: 8,
                 height: 8,
                 color: 'red',
-                speed: 4,
+                speed: 8,
                 draw: function() {
                     ctx.fillStyle = this.color;
                     ctx.fillRect(this.m, this.n, this.width, this.height);
@@ -120,9 +121,9 @@ document.addEventListener('keydown', function(event) {
 
             function animateAmmunition() {
                 requestAnimationFrame(animateAmmunition);
-                ctx.clearRect(ammunition.m, ammunition.n, ammunition.width, ammunition.height + 2);
-                ammunition.update();
-                ammunition.draw();
+                    ctx.clearRect(ammunition.m, ammunition.n, ammunition.width, ammunition.height + 2);
+                    ammunition.update();
+                    ammunition.draw();
             }
             animateAmmunition();
         }
