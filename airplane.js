@@ -60,23 +60,19 @@ function showObstacles() {
             ctx.clearRect(obstacle.w, obstacle.z, obstacle.width, obstacle.height);
             obstacle.update();
             obstacle.draw();
-            collisionWithAirplane(obstacle);
+            if (airplane.x < obstacle.w + obstacle.width &&
+                airplane.x + airplane.width > obstacle.w &&
+                airplane.y < obstacle.z + obstacle.height &&
+                airplane.y + airplane.height > obstacle.z) {
+                ++crashCounter;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (crashCounter === 1) {
+                    gameOver = true;
+                    alert('Game OVER! You hit an obstacle! You have ' + destroyedObstacles + ' points! REFRESH THE PAGE TO START A NEW GAME.');
+                } 
+            }
         }
         animate();
-    }
-}
-
-function collisionWithAirplane(obstacle) {
-    if (airplane.x < obstacle.w + obstacle.width &&
-        airplane.x + airplane.width > obstacle.w &&
-        airplane.y < obstacle.z + obstacle.height &&
-        airplane.y + airplane.height > obstacle.z) {
-        ++crashCounter;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (crashCounter === 1) {
-            gameOver = true;
-            alert('Game OVER! You hit an obstacle! You have ' + destroyedObstacles + ' points! REFRESH THE PAGE TO START A NEW GAME.');
-        } 
     }
 }
 
