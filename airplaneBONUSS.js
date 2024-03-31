@@ -129,9 +129,11 @@ document.addEventListener('keydown', function(event) {
 
             function animateAmmunition() {
                 requestAnimationFrame(animateAmmunition);
-                ctx.clearRect(ammunition.m, ammunition.n, ammunition.width, ammunition.height + 2);
-                ammunition.update();
-                ammunition.draw();
+                for (let i = 0; i < ammunitions.length; i++) {
+                    ctx.clearRect(ammunitions[i].m, ammunitions[i].n, ammunitions[i].width, ammunitions[i].height + 2);
+                    ammunitions[i].update();
+                    ammunitions[i].draw();
+                }
             }
             animateAmmunition();
         }
