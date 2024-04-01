@@ -126,16 +126,16 @@ document.addEventListener('keydown', function(event) {
                 }
             }
             ammunitions.push(ammunition);
-
-            function animateAmmunition() {
-                requestAnimationFrame(animateAmmunition);
-                for (let i = 0; i < ammunitions.length; i++) {
-                    ctx.clearRect(ammunitions[i].m, ammunitions[i].n, ammunitions[i].width, ammunitions[i].height + 2);
-                    ammunitions[i].update();
-                    ammunitions[i].draw();
-                }
-            }
-            animateAmmunition();
         }
     }
 });
+
+function animateAmmunition() {
+    requestAnimationFrame(animateAmmunition);
+    for (let i = 0; i < ammunitions.length; i++) {
+        ctx.clearRect(ammunitions[i].m, ammunitions[i].n, ammunitions[i].width, ammunitions[i].height + 2);
+        ammunitions[i].update();
+        ammunitions[i].draw();
+    }
+}
+animateAmmunition();
