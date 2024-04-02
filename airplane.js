@@ -50,7 +50,7 @@ function showObstacles() {
             width: 100,
             height: 100,
             color: 'white',
-            speed: 7,
+            speed: 4,
             draw: function() {
                 ctx.fillStyle = this.color;
                 ctx.fillRect(this.w, this.z, this.width, this.height);
